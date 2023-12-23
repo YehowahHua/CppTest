@@ -1,9 +1,9 @@
 #include "array_test1.h"
 
-// function to return a MyArray by value
+ 
 MyArray getArrayByValue() {
-   MyArray localInts{10, 20, 30}; // create three-element MyArray
-   return localInts; // return by value creates an rvalue
+   MyArray localInts{10, 20, 30}; 
+   return localInts; 
 }
 
 void array_test1(){
