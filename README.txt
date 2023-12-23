@@ -16,5 +16,18 @@ a2_string_test
 	make
     sudo make install
 
-
-
+a3_array_test
+    --简单使用array
+    /workspaces/CppTest/a3_array_test/src/MyArray.cpp:8:10: fatal error: span: No such file or directory
+    8 | #include <span>
+    还是gcc版本问题：
+    默认版本是g++ (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0
+    升级步骤：
+        sudo apt update
+        sudo apt install build-essential
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/test #添加 GCC 开发工具链 PPA
+        sudo apt update
+        sudo apt install gcc-11 g++-11
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 120 --slave /usr/bin/g++ g++ /usr/bin/g++-11
+        g++ --version
+        升级后的版本是：g++ (Ubuntu 11.4.0-2ubuntu1~20.04) 11.4.0
