@@ -31,3 +31,7 @@ a3_array_test
         sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 120 --slave /usr/bin/g++ g++ /usr/bin/g++-11
         g++ --version
         升级后的版本是：g++ (Ubuntu 11.4.0-2ubuntu1~20.04) 11.4.0
+
+
+b1_stl_test_vector
+    stl 中 容器 vector 使用
