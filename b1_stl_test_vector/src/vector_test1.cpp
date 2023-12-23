@@ -90,32 +90,108 @@ void vector_test3(){
     {
         cout << v1[i] << " ";
     }
-    cout << endl;
+    cout << "\n";
 
     // 2.at访问
     for (int i = 0; i < v1.size(); i++)
     {
         cout << v1.at(i) << " ";
     }
-    cout << endl;
-
-
+    cout << "\n";
 
     //3.正向迭代器
-    vector<int>::iterator it_start = v1.begin(); 
+    vector<int>::iterator it_start = v1.begin(); //v1[i] 和 *(v1.begin() + i) 等价，与指针类似, v1[0] = *(v1.begin())
     for( vector<int>::iterator it = it_start;it != v1.end(); it++ )
     {
         cout << *it <<" ";
     }
     cout << "\n";
-    
+
+    auto it2 = v1.begin();
+    while (it2 != v1.end()) {
+        cout << *it2 << " ";
+        it2++;
+    }
+    cout << "\n";
+
+
+    //4.反向迭代器
+    for(vector<int>::reverse_iterator iter = v1.rbegin();iter != v1.rend();iter++)
+    {
+        cout << *iter <<" "; // 9 8 7 6 5 4 3 2 1 0 
+    }
+    cout << "\n";
+
+    //5.智能指针
+    for(auto val : v1) {
+        cout << val << " "; 
+    }
+    cout << "\n";
+
     // 第一个数据元素
     cout << "v1 的首元素为 " << v1.front() << endl;
 
     // 最后一个元素
     cout << "v1 的末元素为 " << v1.back() << endl;
-
-
 }
 
 
+/**
+ * 方法
+*/
+void vector_test4(){
+    //1.容量
+    vector<int> v1;
+    if(v1.empty()){
+        cout << "v1 is empty " << "\n";
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        v1.push_back(i);
+    }
+
+    if(!v1.empty()){
+        cout << "v1 is not empty " << "\n";
+        cout << "v1 容量为 " << v1.capacity() << "\n"; //16
+        cout << "v1 大小为 " << v1.size() << "\n"; //10
+    }
+    
+    //1.重新指定大小
+    // v1.resize(15); // 如果新size大于原来的，默认用0填充
+    // for_each(v1.begin(), v1.end(), print_fun());//0 1 2 3 4 5 6 7 8 9 0 0 0 0 0 
+    // cout << "\n";
+
+    v1.resize(15, 10); // 也可以指定用10 填充, 若已填充则不会被覆盖
+    for_each(v1.begin(), v1.end(), print_fun());//0 1 2 3 4 5 6 7 8 9 10 10 10 10 10
+    cout << "\n";
+
+    v1.resize(5); // 如果新size小于原来的，超出的部分会被删除
+    for_each(v1.begin(), v1.end(), print_fun());//0 1 2 3 4 
+    cout << "\n";
+
+
+    //2.预留空间
+    vector<int> v;
+
+    // 利用 reserve 预留空间，不初始化，size大小还是原本大小，未初始化不可访问
+    v.reserve(100000);
+
+    int num = 0; // 统计开辟次数
+    int *p = NULL;
+
+    for (int i = 0; i < 100000; i++)
+    {
+        v.push_back(i);
+
+        if (p != &v[0])//判断地址
+        {
+            p = &v[0];
+            num++;
+        }
+    }
+
+    cout << "开辟内存次数为 " << num << endl; // 1,如果没有reserve，那么返回18，提高了性能
+
+
+
+}
